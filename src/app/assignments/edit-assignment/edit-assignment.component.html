@@ -1,0 +1,37 @@
+<div class="container">
+    <h3>Formulaire d'édition</h3>
+    <form 
+        ngForm 
+        #updateForm
+        (submit)="onSaveAssignment(); updateForm.reset()"
+        class="form"
+    >
+
+        <mat-form-field>
+            <input 
+            matInput 
+            placeholder="Edition du nom" 
+            [(ngModel)]="nomDevoir"
+            name="nom"
+            >
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Nouvelle date</mat-label>
+            <input matInput 
+                [matDatepicker]="picker"
+                [(ngModel)]="dateDeRendu"
+                name="date"
+            >
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix 
+                [for]="picker"></mat-datepicker-toggle
+            >
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        
+        <button mat-raised-button color="primary" [disabled]="(this.nomDevoir === '' || this.dateDeRendu === null)">
+            Sauvegarder
+        </button>
+    </form>
+</div>

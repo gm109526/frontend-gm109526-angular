@@ -1,0 +1,47 @@
+<div class="container">
+  <h1><nav><a [routerLink]="['/home']">{{title}}</a></nav></h1>
+</div>
+
+<mat-sidenav-container class="example-container">
+  <!-- Sidenav (menu latéral) -->
+  <mat-sidenav #sidenav mode="side" opened>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/list-assignments']">Liste des Assignments</a>
+      <a mat-list-item [routerLink]="['/add-assignment']">Ajouter un Assignment</a>
+      <a mat-list-item [routerLink]="['/edit-assignment']">Modifier un Assignment</a>
+      <a mat-list-item [routerLink]="['/delete-assignment']">Supprimer un Assignment</a>
+      <a mat-list-item [routerLink]="['/generate-test-data']">Générer des Données de Test</a>
+    </mat-nav-list>    
+  </mat-sidenav>
+
+  <!-- Contenu principal (toolbar + zone d'affichage) -->
+  <mat-sidenav-content>
+    <!-- Toolbar -->
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span style="flex: 1;">Mon Application</span>
+
+      <!-- Icône de la maison (Page d'accueil) -->
+      <a mat-icon-button routerLink="/">
+        <mat-icon>home</mat-icon>
+      </a>
+
+      <!-- Bouton de connexion -->
+       @if(!isLogged()) {
+        <button mat-button (click)="login()">Connexion</button>
+       }
+       @else {
+        <button mat-button (click)="login()">Déconnexion</button>
+       }
+      
+    </mat-toolbar>
+
+    <!-- Zone d'affichage des composants enfants -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

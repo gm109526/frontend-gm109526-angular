@@ -1,0 +1,74 @@
+<main class="container">
+
+<h2>{{titre}}</h2>
+<!-- Bouton pour afficher le formulaire -->
+ <div class="ajouterBtn">
+    <a [routerLink]="['/add-assignment']">
+        <button mat-flat-button color="accent"
+        (click)="onAddAssignmentBtnClick()">
+        Ajouter Assignment
+        </button>
+    </a>
+    <button mat-flat-button color="accent"
+    (click)="peuplerBD()">
+    Peupler BD
+    </button>
+    @if(createdMessage) {
+        <p style="color: green;">{{ createdMessage }}</p>
+    }
+</div>
+
+<!-- Pagination Controls -->
+<div class="pagination-controls">
+<button mat-button (click)="goToFirstPage()" [disabled]="!hasPrevPage">
+    Première Page
+</button>
+<button mat-button (click)="goToPreviousPage()" [disabled]="!hasPrevPage">
+    Page Précédente
+</button>
+<span>Page {{ page }} / {{ totalPages }}</span>
+<button mat-button (click)="goToNextPage()" [disabled]="!hasNextPage">
+    Page Suivante
+</button>
+<button mat-button (click)="goToLastPage()" [disabled]="!hasNextPage">
+    Dernière Page
+</button>
+</div>
+
+<!-- Affichage du nombre total de documents -->
+<p>Total d'assignments : {{ totalDocs }}</p>
+
+<!-- on affiche la liste -->
+<mat-list>
+    <mat-divider></mat-divider>
+        @for(a of assignments; track a.nom) {
+            <nav><a routerLink="/assignment-details/{{a.id}}">
+                <div (click)="assignmentClique(a)">
+                    <h3 mat-sub-header>{{a.dateDeRendu| date:'dd/MM/YYYY'}}</h3>
+                    @if(a.rendu) {
+                        <mat-list-item appRendu>
+                        Le devoir {{a.nom}} a été rendu.
+                        </mat-list-item>    
+                    } @else {
+                        <mat-list-item appNonRendu>
+                            Le devoir {{a.nom}} EST ENCORE A RENDRE !!!
+                        </mat-list-item>
+                    }
+                </div>
+                <mat-divider></mat-divider>
+            </a></nav>
+        }
+</mat-list>
+
+<!-- @if(assignmentSelectionne) {
+    <h3>{{assignmentSelectionne.nom}}</h3>
+}
+
+@if(assignmentSelectionne) {
+    <app-assignment-detail
+    [assignmentTransmis]="assignmentSelectionne"
+    (deleteAssignment)="onDeleteAssignment()"
+    ></app-assignment-detail>
+} -->
+<router-outlet></router-outlet>
+</main>

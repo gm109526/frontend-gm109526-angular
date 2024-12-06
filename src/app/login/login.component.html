@@ -1,0 +1,34 @@
+<h3>Formulaire de connexion</h3>
+<form 
+    ngForm 
+    #loginForm
+    (submit)="onSubmit(); loginForm.reset()"
+    class="form"
+>
+
+    <mat-form-field>
+        <input 
+           matInput 
+           placeholder="Identifiant" 
+           [(ngModel)]="userId"
+           name="user"
+        >
+    </mat-form-field>
+ 
+    <mat-form-field>
+        <input 
+           matInput 
+           placeholder="Mot de passe" 
+           [(ngModel)]="password"
+           name="pass"
+           type="password"
+        >
+    </mat-form-field>
+      
+    <button mat-stroked-button [disabled]="(this.password === '' || this.userId === '')">
+        Connexion
+    </button>
+    @if(errorMessage) {
+        <p style="color: red;">{{ errorMessage }}</p>
+    }
+</form>
