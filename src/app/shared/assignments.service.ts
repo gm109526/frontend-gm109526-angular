@@ -15,7 +15,7 @@ export class AssignmentsService {
     })
   };
 
-  backendURL = "http://localhost:8010/api/assignments"
+  backendURL = "https://backend-gm109526-angular.onrender.com/api/assignments"
 
   constructor (private loggingService: LoggingService, private http: HttpClient) { }
 
